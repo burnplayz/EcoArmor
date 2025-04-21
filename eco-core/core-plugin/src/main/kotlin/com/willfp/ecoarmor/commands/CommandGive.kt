@@ -1,5 +1,6 @@
 package com.willfp.ecoarmor.commands
 
+import com.nexomc.nexo.items.ItemUpdater
 import com.willfp.eco.core.EcoPlugin
 import com.willfp.eco.core.command.impl.Subcommand
 import com.willfp.ecoarmor.sets.ArmorSets
@@ -122,7 +123,7 @@ class CommandGive(plugin: EcoPlugin) : Subcommand(plugin, "give", "ecoarmor.comm
                 val currTear = tier ?: set.getDefaultTier(getSlot(item))
                 toGive.remove(item)
                 ArmorUtils.setTier(item, currTear)
-                toGive.add(item)
+                toGive.add(ItemUpdater.updateItem(item))
             }
         }
         if (itemNamespace.equals("crystal", ignoreCase = true)) {

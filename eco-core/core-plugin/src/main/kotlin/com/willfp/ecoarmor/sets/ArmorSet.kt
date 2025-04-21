@@ -1,5 +1,6 @@
 package com.willfp.ecoarmor.sets
 
+import com.nexomc.nexo.items.ItemUpdater
 import com.willfp.eco.core.EcoPlugin
 import com.willfp.eco.core.config.interfaces.Config
 import com.willfp.eco.core.display.Display
@@ -222,7 +223,7 @@ class ArmorSet(
             PersistentDataType.INTEGER,
             slotConfig.getInt("effectiveDurability")
         )
-        val itemStack = builder.build()
+        var itemStack = builder.build()
         setAdvanced(itemStack, advanced)
         val defaultTier = Tiers.getByID(slotConfig.getString("defaultTier"))
         if (defaultTier == null) {
@@ -232,6 +233,9 @@ class ArmorSet(
         } else {
             setTier(itemStack, defaultTier)
         }
+
+        itemStack = ItemUpdater.updateItem(itemStack);//NEXO ADDON
+
         if (advanced) {
             CustomItem(
                 plugin.namespacedKeyFactory.create(
